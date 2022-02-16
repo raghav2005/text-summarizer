@@ -1,2 +1,4 @@
 *.crdownload
-
+*.zip
+dataverse_files/*
+.DS_Store
