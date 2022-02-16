@@ -11,12 +11,12 @@ tokens = [token.lower() for token in nltk.tokenize.word_tokenize(given_text)]
 print(tokens)
 
 # get rid of non-alphabetic characters
-tokens = [token for token in tokens if token.is_alpha()]
+tokens = [token for token in tokens if token.isalpha()]
 print(tokens)
 
 # remove stop words
 all_stop_words = nltk.corpus.stopwords.words('english')
-tokens = [token for token in alpha_tokens if token not in all_stop_words]
+tokens = [token for token in tokens if token not in all_stop_words]
 print(tokens)
 
 # counter object to see each token and its frequency
