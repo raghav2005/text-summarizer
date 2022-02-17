@@ -64,8 +64,8 @@ for word in given_text.split(' '):
 	words.append(word)
 
 # preprocessing
-print('Original document:', words)
-print('\n\nTokenized and lemmatized document:', preprocess(given_text), '\n\n')
+# print('Original document:', words)
+# print('\n\nTokenized and lemmatized document:', preprocess(given_text), '\n\n')
 
 # training
 newsgroups_train = sklearn.datasets.fetch_20newsgroups(subset = 'train', shuffle = True)
@@ -76,19 +76,19 @@ processed_docs = []
 for doc in newsgroups_train.data:
 	processed_docs.append(preprocess(doc))
 
-print(processed_docs[ : 2], '\n\n')
+# print(processed_docs[ : 2], '\n\n')
 
 # bag of words
 dictionary = gensim.corpora.Dictionary(processed_docs)
 
-count = 0
-for k, v in dictionary.iteritems():
-	print(k, v)
-	count += 1
-	if count > 10:
-		break
+# count = 0
+# for k, v in dictionary.iteritems():
+# 	print(k, v)
+# 	count += 1
+# 	if count > 10:
+# 		break
 
-print('\n')
+# print('\n')
 
 # remove very rare and very common
 dictionary.filter_extremes(no_below = 15, no_above = 0.1, keep_n = 100000)
@@ -99,10 +99,10 @@ bow_corpus = [dictionary.doc2bow(doc) for doc in processed_docs]
 document_num = 20
 bow_doc_x = bow_corpus[document_num]
 
-for i in range(len(bow_doc_x)):
-	print("Word {} (\"{}\") appears {} time.".format(bow_doc_x[i][0], dictionary[bow_doc_x[i][0]], bow_doc_x[i][1]))
+# for i in range(len(bow_doc_x)):
+# 	print("Word {} (\"{}\") appears {} time.".format(bow_doc_x[i][0], dictionary[bow_doc_x[i][0]], bow_doc_x[i][1]))
 
-print('\n')
+# print('\n')
 
 # running LDA using bag of words
 # num_topics - the number of requested latent topics to be extracted from the training corpus.
@@ -120,9 +120,17 @@ print('\n')
 # train lda model
 lda_model = gensim.models.LdaModel(bow_corpus, num_topics = 10, id2word = dictionary, passes = 5)
 
+print('\n------------------ WEIGHTED ------------------\n')
+
 # For each topic, explore words occuring in that topic and its relative weight
 for idx, topic in lda_model.print_topics(-1):
-	print("Topic: {} \nWords: {}".format(idx, topic ))
-	print("\n")
+	print("Topic: {} \nWords: {}\n".format(idx + 1, topic))
 
+lda_model_shown = lda_model.show_topics(num_topics = 10, num_words = 10, formatted = False)
+topics_words = [(topic[0], [word[0] for word in topic[1]]) for topic in lda_model_shown]
 
+print('\n------------------ ONLY WORDS ------------------\n')
+
+# show only topics and words
+for topic, words in topics_words:
+    print('Topic', str(topic + 1) + ':', str(words), '\n')
