@@ -38,21 +38,21 @@ def alt_lemmatize_stemming(given_text):
 
 # tokenize and lemmatize
 def preprocess(text):
-    result = []
-    for token in gensim.utils.simple_preprocess(text):
-        if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 3:
-            result.append(lemmatize_stemming(token))
-            
-    return result
+	result = []
+	for token in gensim.utils.simple_preprocess(text):
+		if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 3:
+			result.append(lemmatize_stemming(token))
+			
+	return result
 
 # alternative tokenize and lemmatize
 def alt_preprocess(given_text):
-    result = []
-    for token in gensim.utils.simple_preprocess(given_text):
-        if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 3:
-            result.append(alt_lemmatize_stemming(token))
-            
-    return result
+	result = []
+	for token in gensim.utils.simple_preprocess(given_text):
+		if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 3:
+			result.append(alt_lemmatize_stemming(token))
+			
+	return result
 
 
 # document text
@@ -61,7 +61,7 @@ given_text = 'This disk has failed many times. I would like to get it replaced.'
 # we will be using the actual approach - not the alt
 words = []
 for word in given_text.split(' '):
-    words.append(word)
+	words.append(word)
 
 # preprocessing
 print('Original document:', words)
@@ -74,7 +74,7 @@ newsgroups_test = sklearn.datasets.fetch_20newsgroups(subset = 'test', shuffle =
 processed_docs = []
 
 for doc in newsgroups_train.data:
-    processed_docs.append(preprocess(doc))
+	processed_docs.append(preprocess(doc))
 
 print(processed_docs[ : 2], '\n\n')
 
@@ -83,10 +83,12 @@ dictionary = gensim.corpora.Dictionary(processed_docs)
 
 count = 0
 for k, v in dictionary.iteritems():
-    print(k, v)
-    count += 1
-    if count > 10:
-        break
+	print(k, v)
+	count += 1
+	if count > 10:
+		break
+
+print('\n')
 
 # remove very rare and very common
 dictionary.filter_extremes(no_below = 15, no_above = 0.1, keep_n = 100000)
@@ -98,6 +100,29 @@ document_num = 20
 bow_doc_x = bow_corpus[document_num]
 
 for i in range(len(bow_doc_x)):
-    print("Word {} (\"{}\") appears {} time.".format(bow_doc_x[i][0], dictionary[bow_doc_x[i][0]], bow_doc_x[i][1]))
+	print("Word {} (\"{}\") appears {} time.".format(bow_doc_x[i][0], dictionary[bow_doc_x[i][0]], bow_doc_x[i][1]))
+
+print('\n')
+
+# running LDA using bag of words
+# num_topics - the number of requested latent topics to be extracted from the training corpus.
+# id2word - a mapping from word ids (integers) to words (strings). It is used to determine the vocabulary size, as well as for debugging and topic printing.
+# workers - the number of extra processes to use for parallelization. Uses all available cores by default.
+# alpha and eta - hyperparameters that affect sparsity of the document-topic (theta) and topic-word (lambda) distributions. Default value is 1/num_topics
+# 	Alpha - the per document topic distribution
+# 		High alpha: Every document has a mixture of all topics(documents appear similar to each other).
+# 		Low alpha: Every document has a mixture of very few topics
+# 	Eta - the per topic word distribution.
+# 		High eta: Each topic has a mixture of most words(topics appear similar to each other).
+# 		Low eta: Each topic has a mixture of few words.
+# passes - the number of training passes through the corpus. For example, if the training corpus has 50,000 documents, chunksize is 10,000, passes is 2, then online training is done in 10 updates
+
+# train lda model
+lda_model = gensim.models.LdaModel(bow_corpus, num_topics = 10, id2word = dictionary, passes = 5)
+
+# For each topic, explore words occuring in that topic and its relative weight
+for idx, topic in lda_model.print_topics(-1):
+	print("Topic: {} \nWords: {}".format(idx, topic ))
+	print("\n")
 
 
