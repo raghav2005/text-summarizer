@@ -2,6 +2,7 @@
 import collections
 import gensim
 import nltk
+import sklearn
 import spacy
 
 # lemmatize and stemming
@@ -54,9 +55,22 @@ def alt_preprocess(given_text):
     return result
 
 
-given_text = 'Avengers: Infinity War was a 2018 American superhero film based on the Marvel Comics superhero team the Avengers. It is the 19th film in the Marvel Cinematic Universe (MCU). The running time of the movie was 149 minutes and the box office collection was around 2 billion dollars.'
+# document text
+given_text = 'This disk has failed many times. I would like to get it replaced.'
 
-print(alt_preprocess(given_text))
-print(preprocess(given_text))
+# we will be using the actual approach - not the alt
+words = []
+for word in given_text.split(' '):
+    words.append(word)
 
+print("Original document:", words)
+print("\n\nTokenized and lemmatized document:", preprocess(given_text), "\n\n")
 
+newsgroups_train = sklearn.datasets.fetch_20newsgroups(subset = 'train', shuffle = True)
+newsgroups_test = sklearn.datasets.fetch_20newsgroups(subset = 'test', shuffle = True)
+
+processed_docs = []
+
+for doc in newsgroups_train.data:
+    processed_docs.append(preprocess(doc))
+print(processed_docs[ : 2])
