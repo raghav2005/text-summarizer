@@ -104,19 +104,6 @@ bow_doc_x = bow_corpus[document_num]
 
 # print('\n')
 
-# running LDA using bag of words
-# num_topics - the number of requested latent topics to be extracted from the training corpus.
-# id2word - a mapping from word ids (integers) to words (strings). It is used to determine the vocabulary size, as well as for debugging and topic printing.
-# workers - the number of extra processes to use for parallelization. Uses all available cores by default.
-# alpha and eta - hyperparameters that affect sparsity of the document-topic (theta) and topic-word (lambda) distributions. Default value is 1/num_topics
-# 	Alpha - the per document topic distribution
-# 		High alpha: Every document has a mixture of all topics(documents appear similar to each other).
-# 		Low alpha: Every document has a mixture of very few topics
-# 	Eta - the per topic word distribution.
-# 		High eta: Each topic has a mixture of most words(topics appear similar to each other).
-# 		Low eta: Each topic has a mixture of few words.
-# passes - the number of training passes through the corpus. For example, if the training corpus has 50,000 documents, chunksize is 10,000, passes is 2, then online training is done in 10 updates
-
 # train lda model
 lda_model = gensim.models.LdaModel(bow_corpus, num_topics = 10, id2word = dictionary, passes = 5)
 
