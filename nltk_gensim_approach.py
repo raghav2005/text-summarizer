@@ -8,7 +8,7 @@ import spacy
 # lemmatize and stemming
 def lemmatize_stemming(text):
 	stemmer = nltk.stem.SnowballStemmer('english')
-	return stemmer.stem(nltk.stem.WordNetLemmatizer().lemmatize(text, pos='v'))
+	return stemmer.stem(nltk.stem.WordNetLemmatizer().lemmatize(text, pos = 'v'))
 
 # alternative lemmatize and stemming
 def alt_lemmatize_stemming(given_text):
@@ -34,7 +34,7 @@ def alt_lemmatize_stemming(given_text):
 		else:
 			tokens_str += tokens[i]
 
-	return lemmatize_stemming(tokens_str)
+	return tokens_str
 
 # tokenize and lemmatize
 def preprocess(text):
@@ -58,14 +58,10 @@ def alt_preprocess(given_text):
 # document text
 given_text = 'This disk has failed many times. I would like to get it replaced.'
 
-# we will be using the actual approach - not the alt
+# use LDA / Gensim approach, not alternative approach
 words = []
 for word in given_text.split(' '):
 	words.append(word)
-
-# preprocessing
-# print('Original document:', words)
-# print('\n\nTokenized and lemmatized document:', preprocess(given_text), '\n\n')
 
 # training
 newsgroups_train = sklearn.datasets.fetch_20newsgroups(subset = 'train', shuffle = True)
@@ -88,30 +84,27 @@ dictionary = gensim.corpora.Dictionary(processed_docs)
 # 	if count > 10:
 # 		break
 
-# print('\n')
-
 # remove very rare and very common
 dictionary.filter_extremes(no_below = 15, no_above = 0.1, keep_n = 100000)
 # create bag of words model for each doc
 bow_corpus = [dictionary.doc2bow(doc) for doc in processed_docs]
 
-# preview bag of words for sample preprocessed document
+# bag of words for sample preprocessed document
 document_num = 20
 bow_doc_x = bow_corpus[document_num]
 
+# number of times a word appears
 # for i in range(len(bow_doc_x)):
 # 	print("Word {} (\"{}\") appears {} time.".format(bow_doc_x[i][0], dictionary[bow_doc_x[i][0]], bow_doc_x[i][1]))
-
-# print('\n')
 
 # train lda model
 lda_model = gensim.models.LdaModel(bow_corpus, num_topics = 10, id2word = dictionary, passes = 5)
 
 print('\n------------------ WEIGHTED ------------------\n')
 
-# For each topic, explore words occuring in that topic and its relative weight
+# for each topic, explore words occuring in that topic and its relative weight
 for idx, topic in lda_model.print_topics(-1):
-	print("Topic: {} \nWords: {}\n".format(idx + 1, topic))
+	print('Topic: ' + str(idx + 1) + '\nWords: '+ str(topic) + '\n')
 
 lda_model_shown = lda_model.show_topics(num_topics = 10, num_words = 10, formatted = False)
 topics_words = [(topic[0], [word[0] for word in topic[1]]) for topic in lda_model_shown]
