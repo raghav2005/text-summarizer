@@ -52,3 +52,5 @@ Topic 8: ['game', 'team', 'player', 'hockey', 'play', 'season', 'toronto', 'leag
 Topic 9: ['jesus', 'armenian', 'christian', 'book', 'christ', 'bible', 'child', 'church', 'woman', 'greek'] 
 
 Topic 10: ['scsi', 'drive', 'sale', 'apple', 'controller', 'disease', 'washington', 'food', 'berkeley', 'harvard']
+
+11m 33s TO RUN
