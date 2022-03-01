@@ -26,15 +26,7 @@ def alt_lemmatize_stemming(given_text):
 	lemmatizer = nltk.stem.WordNetLemmatizer()
 	tokens = [lemmatizer.lemmatize(token) for token in tokens]
 
-	# convert tokens list to string
-	tokens_str = ''
-	for i in range(len(tokens)):
-		if i != len(tokens) - 1:
-			tokens_str += tokens[i] + ' '
-		else:
-			tokens_str += tokens[i]
-
-	return tokens_str
+	return tokens
 
 # tokenize and lemmatize
 def preprocess(text):
@@ -50,18 +42,14 @@ def alt_preprocess(given_text):
 	result = []
 	for token in gensim.utils.simple_preprocess(given_text):
 		if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 3:
-			result.append(alt_lemmatize_stemming(token))
+			to_append = alt_lemmatize_stemming(token)
+			if len(to_append) == 1:
+				result.append(alt_lemmatize_stemming(token)[0])
 			
 	return result
 
 
-# document text - testing
-given_text = 'This disk has failed many times. I would like to get it replaced.'
-words = []
-for word in given_text.split(' '):
-	words.append(word)
-
-# use LDA / Gensim approach, not alternative approach
+# use alternative approach
 # training
 newsgroups_train = sklearn.datasets.fetch_20newsgroups(subset = 'train', shuffle = True)
 newsgroups_test = sklearn.datasets.fetch_20newsgroups(subset = 'test', shuffle = True)
@@ -69,7 +57,7 @@ newsgroups_test = sklearn.datasets.fetch_20newsgroups(subset = 'test', shuffle =
 processed_docs = []
 
 for doc in newsgroups_train.data:
-	processed_docs.append(preprocess(doc))
+	processed_docs.append(alt_preprocess(doc))
 
 # print(processed_docs[ : 2], '\n\n')
 

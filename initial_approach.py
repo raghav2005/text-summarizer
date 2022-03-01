@@ -25,6 +25,13 @@ bag_of_words = collections.Counter(tokens)
 # output most common tokens
 print(bag_of_words.most_common(5))
 
+
+
+
+
+
+
+# FOR NLTK_GENSIM_APPROACH
 # running LDA using bag of words
 # num_topics - the number of requested latent topics to be extracted from the training corpus.
 # id2word - a mapping from word ids (integers) to words (strings). It is used to determine the vocabulary size, as well as for debugging and topic printing.
