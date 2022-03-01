@@ -1,0 +1,54 @@
+------------------ WEIGHTED ------------------
+
+Topic: 1
+Words: 0.007*"israel" + 0.007*"christian" + 0.006*"israeli" + 0.006*"evidence" + 0.005*"true" + 0.005*"atheist" + 0.005*"religion" + 0.005*"claim" + 0.005*"human" + 0.005*"life"
+
+Topic: 2
+Words: 0.011*"drive" + 0.006*"bike" + 0.006*"speed" + 0.006*"power" + 0.004*"price" + 0.004*"car" + 0.004*"high" + 0.004*"wire" + 0.004*"hard" + 0.003*"model"
+
+Topic: 3
+Words: 0.007*"weapon" + 0.006*"government" + 0.006*"crime" + 0.006*"gun" + 0.005*"american" + 0.005*"firearm" + 0.004*"police" + 0.004*"control" + 0.004*"drug" + 0.004*"caltech"
+
+Topic: 4
+Words: 0.012*"chip" + 0.009*"encryption" + 0.009*"information" + 0.009*"clipper" + 0.008*"public" + 0.007*"key" + 0.007*"access" + 0.006*"security" + 0.006*"government" + 0.006*"data"
+
+Topic: 5
+Words: 0.008*"president" + 0.007*"program" + 0.006*"money" + 0.006*"research" + 0.005*"health" + 0.005*"nasa" + 0.005*"clinton" + 0.005*"national" + 0.004*"cost" + 0.004*"government"
+
+Topic: 6
+Words: 0.022*"space" + 0.013*"nasa" + 0.007*"earth" + 0.006*"orbit" + 0.006*"moon" + 0.005*"ohio" + 0.005*"mission" + 0.005*"center" + 0.005*"satellite" + 0.004*"alaska"
+
+Topic: 7
+Words: 0.020*"window" + 0.018*"file" + 0.011*"program" + 0.008*"card" + 0.008*"version" + 0.008*"software" + 0.007*"image" + 0.007*"graphic" + 0.006*"color" + 0.006*"entry"
+
+Topic: 8
+Words: 0.020*"game" + 0.018*"team" + 0.011*"player" + 0.008*"hockey" + 0.008*"play" + 0.007*"season" + 0.007*"toronto" + 0.005*"league" + 0.004*"baseball" + 0.004*"division"
+
+Topic: 9
+Words: 0.011*"jesus" + 0.007*"armenian" + 0.006*"christian" + 0.006*"book" + 0.005*"christ" + 0.005*"bible" + 0.005*"child" + 0.005*"church" + 0.004*"woman" + 0.004*"greek"
+
+Topic: 10
+Words: 0.012*"scsi" + 0.009*"drive" + 0.008*"sale" + 0.007*"apple" + 0.006*"controller" + 0.005*"disease" + 0.005*"washington" + 0.005*"food" + 0.005*"berkeley" + 0.004*"harvard"
+
+
+------------------ ONLY WORDS ------------------
+
+Topic 1: ['israel', 'christian', 'israeli', 'evidence', 'true', 'atheist', 'religion', 'claim', 'human', 'life'] 
+
+Topic 2: ['drive', 'bike', 'speed', 'power', 'price', 'car', 'high', 'wire', 'hard', 'model'] 
+
+Topic 3: ['weapon', 'government', 'crime', 'gun', 'american', 'firearm', 'police', 'control', 'drug', 'caltech'] 
+
+Topic 4: ['chip', 'encryption', 'information', 'clipper', 'public', 'key', 'access', 'security', 'government', 'data'] 
+
+Topic 5: ['president', 'program', 'money', 'research', 'health', 'nasa', 'clinton', 'national', 'cost', 'government'] 
+
+Topic 6: ['space', 'nasa', 'earth', 'orbit', 'moon', 'ohio', 'mission', 'center', 'satellite', 'alaska'] 
+
+Topic 7: ['window', 'file', 'program', 'card', 'version', 'software', 'image', 'graphic', 'color', 'entry'] 
+
+Topic 8: ['game', 'team', 'player', 'hockey', 'play', 'season', 'toronto', 'league', 'baseball', 'division'] 
+
+Topic 9: ['jesus', 'armenian', 'christian', 'book', 'christ', 'bible', 'child', 'church', 'woman', 'greek'] 
+
+Topic 10: ['scsi', 'drive', 'sale', 'apple', 'controller', 'disease', 'washington', 'food', 'berkeley', 'harvard']
